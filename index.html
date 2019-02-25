@@ -33,7 +33,7 @@
 <body>
 
   <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-    <a class="navbar-brand mb-0 h1" href="#">InCiSE 2019 results dashboard</a>
+    <a class="navbar-brand mb-0 h1" href="#">Test results dashboard</a>
     <ul class = "nav nav-pills" id="incise-tab-nav" role="tablist">
       <li class="nav-item " id="graph-tab"><a id="graph-tab-link" class="nav-link active" data-toggle="tab" href="#graph-panel">Graphs</a></li>
       <li class="nav-item " id="data-tab"><a id="data-tab-link" class="nav-link" data-toggle="tab" href="#data-panel">Data</a></li>
@@ -144,15 +144,22 @@
 <div class="tab-content " id="incise-tab-content">
 
 <div class="tab-pane active" id="graph-panel">
-  <div class="alert alert-dismissible alert-secondary">
+  <div class="alert alert-dismissible alert-light">
     <button type="button" class="close" data-dismiss="alert">&times;</button>
-    <strong class="text-primary">Graphs:</strong> These graphs show the results for the InCiSE index or indicator you have selected. The bar graph on the left shows the overall index or indicator scores for all 38 countries. The radar graph on the right shows the results for the constituent components of the score - when the index is selected it will show you the scores for the 12 InCiSE indcators, when an indicator is selected it will show you the scores for the metrics that make up that indicator. The radar chart shows the selected country's scores and the InCiSE average. A radar point with a white fill means that the data for that data for the indicator/metric is missing for that country and has been imputed.
+    <strong class="text-primary">Graphs:</strong>
+    <ul>
+      <li>These graphs show the results for the InCiSE index or indicator you have selected.</li>
+      <li>The bar graph on the left shows the overall index or indicator scores for all 38 countries.</li>
+      <li>The radar graph on the right shows the results for the constituent components of the score - when the index is selected it will show you the scores for the 12 InCiSE indcators, when an indicator is selected it will show you the scores for the metrics that make up that indicator.</li>
+      <li>The radar chart shows the selected country's scores and the InCiSE average.</li>
+      <li>A radar point with a white fill means that the data for that data for the indicator/metric is missing for that country and has been imputed.</li>
+  </ul>
   </div>
 <div id="incise-graph" class="responsive-plot"></div>
 </div>
 
 <div class="tab-pane fade " id="data-panel">
-  <div class="alert alert-dismissible alert-secondary">
+  <div class="alert alert-dismissible alert-light">
     <button type="button" class="close" data-dismiss="alert">&times;</button>
     <strong class="text-primary">Data table:</strong> This table shows the results for the selected indicator. At the bottom of the table you can use the buttons to copy this table to the clipboard, download this specific table as a CSV file, or download a CSV file containing all the data from the 2019 edition of InCISE.
   </div>
@@ -163,7 +170,7 @@
 </div>
 
 <div class="tab-pane fade " id="ref-panel">
-  <div class="alert alert-dismissible alert-secondary">
+  <div class="alert alert-dismissible alert-light">
     <button type="button" class="close" data-dismiss="alert">&times;</button>
     <strong class="text-primary">Reference table:</strong> This table shows the refence metadata about the InCiSE index or the selected indicator. At the bottom of the table you can use the buttons to copy this table to the clipboard, download this specific table as a CSV file, or download a CSV file containing all the metadata from the 2019 edition of InCISE.
   </div>
