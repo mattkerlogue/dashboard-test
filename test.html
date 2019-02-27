@@ -36,7 +36,7 @@
     <a class="navbar-brand mb-0 h1" href="#">Test results dashboard</a>
     <ul class = "nav nav-pills" id="incise-tab-nav" role="tablist">
       <li class="nav-item " id="graph-tab"><a id="graph-tab-link" class="nav-link active" data-toggle="tab" href="#graph-panel">Graphs</a></li>
-      <li class="nav-item " id="data-tab"><a id="data-tab-link" class="nav-link" data-toggle="tab" href="#data-panel">Data</a></li>
+      <li class="nav-item " id="data-tab" data-container="body" data-toggle="popover" data-trigger="manual" data-placement="bottom" data-content="Select a country to view data"><a id="data-tab-link" class="nav-link" data-toggle="tab" href="#data-panel">Data</a></li>
       <li class="nav-item " id="ref-tab"><a id="ref-tab-link" class="nav-link" data-toggle="tab" href="#ref-panel">Metadata</a></li>
       <li class="nav-item " id="about-tab"><a id="about-tab-link" class="nav-link" data-toggle="tab" href="#about-panel">About</a></li>
     </ul>
@@ -68,13 +68,8 @@
 <div class="row">
 
 <div class="col-lg-2 p-3 bg-light" id="incise-sidebar">
-
-  <div class="alert alert-dismissible alert-warning">
-    <button type="button" class="close" data-dismiss="alert">&times;</button>
-    <strong>Select a country to get started</strong>
-  </div>
-  <div class="card">
-    <div class="card-header">Graph controls</div>
+  <div class="card border-info" id="incise-controls">
+    <div class="card-header bg-info" style="color: #ffffff;">Graph and data controls</div>
     <div class="card-body">
       <div id="incise-selectors">
         <div id="country-selector">
@@ -140,15 +135,13 @@
         </select>
       </div>
       </div>
+      <div class="pt-3">
+        <div class="custom-control custom-switch">
+          <input type="checkbox" class="custom-control-input" id="toggle-help" checked="true">
+          <label class="custom-control-label" for="toggle-help">Show help</label>
+        </div>
+      </div>
     </div>
-  </div>
-
-  <div class="pt-3">
-    <div class="custom-control custom-switch">
-      <input type="checkbox" class="custom-control-input" id="toggle-help" checked="true">
-      <label class="custom-control-label" for="toggle-help">Show help</label>
-    </div>
-    <p class="pt-3" id="help-text"></p>
   </div>
 
 </div>
@@ -906,18 +899,28 @@ $(document).ready(
   $("#welcome-modal").modal(),
 );
 
-$("#radar-tab").on('shown.bs.tab',function(){
+$("#graph-tab").on('shown.bs.tab',function(){
   plot_graphs();
 });
 
 $("#about-tab").on('shown.bs.tab',function(){
-  $("#incise-sidebar").toggleClass("invisible");
+  $("#incise-controls").hide();
 });
 
 $("#about-tab").on('hide.bs.tab',function(){
-  $("#incise-sidebar").toggleClass("invisible");
+  $("#incise-controls").show();
 });
 
+$('#data-tab').hover(
+  function () {
+    if ($('#data-tab-link').hasClass('disabled')) {
+      $(this).popover('show')
+    }
+  },
+  function () {
+    $(this).popover('hide')
+  }
+)
 
 $("#incise-graph").on('plotly_click', function(_, data){
   var country = data.points[0].y
@@ -931,28 +934,6 @@ $("#incise-graph").on('plotly_click', function(_, data){
   }
 
 })
-
-$('#country-selector').hover(
-  function(){
-    if ($('#toggle-help').prop('checked') == true) {
-      $(this).popover('toggle')
-    }
-  },
-  function(){
-    $(this).popover('hide')
-  }
-)
-
-$('#indicator-selector').hover(
-  function(){
-    if ($('#toggle-help').prop('checked') == true) {
-      $(this).popover('toggle')
-    }
-  },
-  function(){
-    $(this).popover('hide')
-  }
-)
 
 $('#toggle-help').on('change', function(){
   if ($('#toggle-help').prop('checked') == true) {
@@ -968,21 +949,6 @@ $('.help > .close').click(function(data){
 })
 
 
-$("#incise-graph").on('plotly_click', function(_,data){
-
-  var trace_dat = data.points[0]
-
-  var new_hover = null
-
-  if (trace_dat.curveNumber == 3 | trace_dat.curveNumber == 4)  {
-    Plotly.Fx.hover($("#incise-graph"), [
-      {curveNumber:trace_dat.curveNumber, pointNumber: trace_dat.pointNumber}
-    ])
-    $(".hovertext > .nums").html(trace_dat.pointNumber)
-  }
-
-
-})
 
 </script>
 
