@@ -68,75 +68,89 @@
 <div class="row">
 
 <div class="col-lg-2 p-3 bg-light" id="incise-sidebar">
+
   <div class="alert alert-dismissible alert-warning">
     <button type="button" class="close" data-dismiss="alert">&times;</button>
     <strong>Select a country to get started</strong>
   </div>
-<div class="card">
-<div class="card-header">Graph controls</div>
-<div class="card-body">
-<div id="incise-selectors">
-    <label for="select-country">Select a country:</label>
-    <select id="select-country">
-      <option disabled selected value="">Select a country:</option>
-      <option value="BDG">BDG</option>
-      <option value="BKV">BKV</option>
-      <option value="CHQ">CHQ</option>
-      <option value="CPJ">CPJ</option>
-      <option value="FTG">FTG</option>
-      <option value="GIP">GIP</option>
-      <option value="GSA">GSA</option>
-      <option value="GUJ">GUJ</option>
-      <option value="GUX">GUX</option>
-      <option value="HEU">HEU</option>
-      <option value="HUQ">HUQ</option>
-      <option value="IJM">IJM</option>
-      <option value="INZ">INZ</option>
-      <option value="JDH">JDH</option>
-      <option value="JYK">JYK</option>
-      <option value="KBJ">KBJ</option>
-      <option value="KVY">KVY</option>
-      <option value="LFO">LFO</option>
-      <option value="LGM">LGM</option>
-      <option value="MLV">MLV</option>
-      <option value="MMR">MMR</option>
-      <option value="MOQ">MOQ</option>
-      <option value="NPE">NPE</option>
-      <option value="OES">OES</option>
-      <option value="ONU">ONU</option>
-      <option value="QKB">QKB</option>
-      <option value="QNT">QNT</option>
-      <option value="RNZ">RNZ</option>
-      <option value="SHB">SHB</option>
-      <option value="TQN">TQN</option>
-      <option value="TRU">TRU</option>
-      <option value="UQB">UQB</option>
-      <option value="UYD">UYD</option>
-      <option value="VFC">VFC</option>
-      <option value="VLO">VLO</option>
-      <option value="VQC">VQC</option>
-      <option value="YGT">YGT</option>
-      <option value="YRO">YRO</option>
-  </select>
-  <label for="select-indicator">Select an indicator:</label>
-  <select id="select-indicator">
-    <option value="OVERALL">InCiSE Index</option>
-    <option value="CAP">Capabilities</option>
-    <option value="CRM">Crisis and risk management</option>
-    <option value="DIG">Digital services</option>
-    <option value="FFM">Fiscal and financial management</option>
-    <option value="HRM">HR management</option>
-    <option value="INC">Inclusiveness</option>
-    <option value="INT">Integrity</option>
-    <option value="OPN">Openness</option>
-    <option value="POL">Policy making</option>
-    <option value="PRO">Procurement</option>
-    <option value="REG">Regulation</option>
-    <option value="TAX">Tax administration</option>
-  </select>
-</div>
-</div>
-</div>
+  <div class="card">
+    <div class="card-header">Graph controls</div>
+    <div class="card-body">
+      <div id="incise-selectors">
+        <div id="country-selector" data-container="body" data-toggle="popover" data-placement="right" data-content="Select a country from the list">
+        <label for="select-country">Select a country:</label>
+        <select id="select-country">
+          <option disabled selected value="">Select a country:</option>
+          <option value="BDG">BDG</option>
+          <option value="BKV">BKV</option>
+          <option value="CHQ">CHQ</option>
+          <option value="CPJ">CPJ</option>
+          <option value="FTG">FTG</option>
+          <option value="GIP">GIP</option>
+          <option value="GSA">GSA</option>
+          <option value="GUJ">GUJ</option>
+          <option value="GUX">GUX</option>
+          <option value="HEU">HEU</option>
+          <option value="HUQ">HUQ</option>
+          <option value="IJM">IJM</option>
+          <option value="INZ">INZ</option>
+          <option value="JDH">JDH</option>
+          <option value="JYK">JYK</option>
+          <option value="KBJ">KBJ</option>
+          <option value="KVY">KVY</option>
+          <option value="LFO">LFO</option>
+          <option value="LGM">LGM</option>
+          <option value="MLV">MLV</option>
+          <option value="MMR">MMR</option>
+          <option value="MOQ">MOQ</option>
+          <option value="NPE">NPE</option>
+          <option value="OES">OES</option>
+          <option value="ONU">ONU</option>
+          <option value="QKB">QKB</option>
+          <option value="QNT">QNT</option>
+          <option value="RNZ">RNZ</option>
+          <option value="SHB">SHB</option>
+          <option value="TQN">TQN</option>
+          <option value="TRU">TRU</option>
+          <option value="UQB">UQB</option>
+          <option value="UYD">UYD</option>
+          <option value="VFC">VFC</option>
+          <option value="VLO">VLO</option>
+          <option value="VQC">VQC</option>
+          <option value="YGT">YGT</option>
+          <option value="YRO">YRO</option>
+        </select>
+      </div>
+      <div id="indicator-selector" data-container="body" data-toggle="popover" data-placement="right" data-content="Select an indicator from the list">
+        <label for="select-indicator">Select an indicator:</label>
+        <select id="select-indicator">
+          <option value="OVERALL">InCiSE Index</option>
+          <option value="CAP">Capabilities</option>
+          <option value="CRM">Crisis and risk management</option>
+          <option value="DIG">Digital services</option>
+          <option value="FFM">Fiscal and financial management</option>
+          <option value="HRM">HR management</option>
+          <option value="INC">Inclusiveness</option>
+          <option value="INT">Integrity</option>
+          <option value="OPN">Openness</option>
+          <option value="POL">Policy making</option>
+          <option value="PRO">Procurement</option>
+          <option value="REG">Regulation</option>
+          <option value="TAX">Tax administration</option>
+        </select>
+      </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="pt-3">
+    <div class="custom-control custom-switch">
+      <input type="checkbox" class="custom-control-input" id="toggle-help">
+      <label class="custom-control-label" for="toggle-help">Turn on help</label>
+    </div>
+    <p class="pt-3" id="help-text"></p>
+  </div>
+
 </div>
 
 <div class="col p-3">
@@ -163,7 +177,7 @@
     <button type="button" class="close" data-dismiss="alert">&times;</button>
     <strong class="text-primary">Data table:</strong> This table shows the results for the selected indicator. At the bottom of the table you can use the buttons to copy this table to the clipboard, download this specific table as a CSV file, or download a CSV file containing all the data from the 2019 edition of InCISE.
   </div>
-  <h4 id="data-title" class="mt-3">Data table</h4>
+  <h5 id="data-title" class="mt-3">Data table</h5>
   <div class="table-responsive">
     <table id="incise-table" class="table table-striped"></table>
   </div>
@@ -174,7 +188,7 @@
     <button type="button" class="close" data-dismiss="alert">&times;</button>
     <strong class="text-primary">Reference table:</strong> This table shows the refence metadata about the InCiSE index or the selected indicator. At the bottom of the table you can use the buttons to copy this table to the clipboard, download this specific table as a CSV file, or download a CSV file containing all the metadata from the 2019 edition of InCISE.
   </div>
-  <h4 id="ref-title" class="mt-3">Reference table</h4>
+  <h5 id="ref-title" class="mt-3">Reference table</h5>
   <div class="table-responsive">
     <table id="ref-table" class="table table-striped table-sm"></table>
   </div>
@@ -700,14 +714,14 @@
             x: 0.95
           },
           hovermode: 'closest',
-          paper_bgcolor: 'rgba(255,255,255,0)',
-          plot_bgcolor: 'rgba(255,255,255,0)',
+          paper_bgcolor: '#fff',
+          plot_bgcolor: '#fff',
         }
 
         var sub_data = [base_bar, bar_incise, bar_country, radar_incise, radar_country, radar_impute]
 
         var sub_config = {
-          displayModeBar: true, responsive: true, displaylogo: false, modeBarButtonsToRemove:['select2d', 'zoom2d', 'lasso2d', 'zoomIn2d', 'zoomOut2d', 'hoverCompareCartesian', 'toggleSpikelines']}
+          displayModeBar: true, responsive: true, displaylogo: false, modeBarButtonsToRemove:['select2d', 'zoom2d', 'lasso2d', 'zoomIn2d', 'zoomOut2d', 'hoverClosestCartesian', 'hoverCompareCartesian', 'toggleSpikelines', 'resetViews']}
 
         Plotly.newPlot('incise-graph', sub_data, sub_layout, sub_config)
 
@@ -901,12 +915,71 @@ $("#about-tab").on('hide.bs.tab',function(){
   $("#incise-sidebar").toggleClass("invisible");
 });
 
-// $("#incise-graph").on('plotly_hover', function(data){
-//  var str = $(".hovertext > text.nums").html();
-//  str = str.replace("r: ", "");
-//  str = str.replace("θ: ", "");
-//  $(".hovertext > text.nums").html(str);
-// })
+
+$("#incise-graph").on('plotly_click', function(_, data){
+  var country = data.points[0].y
+
+  if ((typeof country) != "undefined") {
+    if (country != "InCiSE") {
+      selectizeCountry.setValue(country);
+      plot_graphs();
+      filter_table();
+    }
+  }
+
+})
+
+$('#country-selector').hover(
+  function(){
+    if ($('#toggle-help').prop('checked') == true) {
+      $(this).popover('toggle')
+    }
+  },
+  function(){
+    $(this).popover('hide')
+  }
+)
+
+$('#indicator-selector').hover(
+  function(){
+    if ($('#toggle-help').prop('checked') == true) {
+      $(this).popover('toggle')
+    }
+  },
+  function(){
+    $(this).popover('hide')
+  }
+)
+
+var active_tab = "Graphs";
+$('[data-toggle="tab"]').on('show.bs.tab', function(e){
+  active_tab = e.target.innerHTML;
+  show_help_text()
+})
+
+
+function show_help_text() {
+
+  var help_text = null
+
+  if (active_tab == "Graphs") {
+    help_text = "<ul><li>These graphs show the results for the InCiSE index or indicator you have selected.</li><li>The bar graph on the left shows the overall index or indicator scores for all 38 countries.</li><li>The radar graph on the right shows the results for the constituent components of the score - when the index is selected it will show you the scores for the 12 InCiSE indcators, when an indicator is selected it will show you the scores for the metrics that make up that indicator.</li><li>The radar chart shows the selected country's scores and the InCiSE average.</li><li>A radar point with a white fill means that the data for that data for the indicator/metric is missing for that country and has been imputed.</li></ul>"
+  } else if (active_tab == "Data") {
+    help_text = "This table shows the results for the selected indicator. At the bottom of the table you can use the buttons to copy this table to the clipboard, download this specific table as a CSV file, or download a CSV file containing all the data from the 2019 edition of InCISE."
+  } else if (active_tab == "Metadata") {
+    help_text = "This table shows the refence metadata about the InCiSE index or the selected indicator. At the bottom of the table you can use the buttons to copy this table to the clipboard, download this specific table as a CSV file, or download a CSV file containing all the metadata from the 2019 edition of InCISE."
+  }
+
+  if ($('#toggle-help').prop('checked') == true) {
+    $("#help-text").html(help_text)
+  } else {
+    $("#help-text").html("")
+  }
+}
+
+$('#toggle-help').on('change', function(){
+  show_help_text()
+})
 
 </script>
 
