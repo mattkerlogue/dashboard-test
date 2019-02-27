@@ -77,7 +77,7 @@
     <div class="card-header">Graph controls</div>
     <div class="card-body">
       <div id="incise-selectors">
-        <div id="country-selector" data-container="body" data-toggle="popover" data-placement="right" data-content="Select a country from the list">
+        <div id="country-selector">
         <label for="select-country">Select a country:</label>
         <select id="select-country">
           <option disabled selected value="">Select a country:</option>
@@ -121,7 +121,7 @@
           <option value="YRO">YRO</option>
         </select>
       </div>
-      <div id="indicator-selector" data-container="body" data-toggle="popover" data-placement="right" data-content="Select an indicator from the list">
+      <div id="indicator-selector">
         <label for="select-indicator">Select an indicator:</label>
         <select id="select-indicator">
           <option value="OVERALL">InCiSE Index</option>
@@ -530,8 +530,7 @@
           name: 'InCiSE average',
           type: 'scatterpolar',
           mode: 'lines+markers',
-          hoverinfo: "none",
-          text: "InCiSE",
+          hoverinfo: "name+r",
           theta: unpack(rows, 'graph_label'),
           r: unpack(rows, 'value'),
           marker: {
@@ -559,8 +558,7 @@
           mode: 'lines+markers',
           theta: unpack(rows, 'graph_label'),
           r: unpack(rows, 'value'),
-          hoverinfo: "none",
-          text: selectizeCountry.getItem(selectizeCountry.getValue()).text(),
+          hoverinfo: "name+r",
           marker: {
             line: {width: 2, color: '#D53880'},
             size: 8,
@@ -669,6 +667,7 @@
             tickvals: [0,0.25,0.5,0.75,1],
             showgrid: true,
             title: '',
+            hoverformat: '.2f',
             zeroline: true,
             fixedrange: true,
             domain: [0, 0.3]
@@ -692,6 +691,7 @@
               tick0: 0,
               dtick: 0.25,
               ticks: "",
+              hoverformat: '.2f',
               showline: false,
               showticklabels: false,
               fixedrange: true
