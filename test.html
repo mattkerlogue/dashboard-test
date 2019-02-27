@@ -145,8 +145,8 @@
 
   <div class="pt-3">
     <div class="custom-control custom-switch">
-      <input type="checkbox" class="custom-control-input" id="toggle-help">
-      <label class="custom-control-label" for="toggle-help">Turn on help</label>
+      <input type="checkbox" class="custom-control-input" id="toggle-help" checked="true">
+      <label class="custom-control-label" for="toggle-help">Show help</label>
     </div>
     <p class="pt-3" id="help-text"></p>
   </div>
@@ -158,8 +158,8 @@
 <div class="tab-content " id="incise-tab-content">
 
 <div class="tab-pane active" id="graph-panel">
-  <div class="alert alert-dismissible alert-light">
-    <button type="button" class="close" data-dismiss="alert">&times;</button>
+  <div class="alert alert-dismissible alert-light fade show help" id="graph-alert">
+    <button type="button" class="close" id="graph-close">&times;</button>
     <strong class="text-primary">Graphs:</strong>
     <ul>
       <li>These graphs show the results for the InCiSE index or indicator you have selected.</li>
@@ -173,8 +173,8 @@
 </div>
 
 <div class="tab-pane fade " id="data-panel">
-  <div class="alert alert-dismissible alert-light">
-    <button type="button" class="close" data-dismiss="alert">&times;</button>
+  <div class="alert alert-dismissible alert-light fade show help" id="data-alert">
+    <button type="button" class="close" id="data-close">&times;</button>
     <strong class="text-primary">Data table:</strong> This table shows the results for the selected indicator. At the bottom of the table you can use the buttons to copy this table to the clipboard, download this specific table as a CSV file, or download a CSV file containing all the data from the 2019 edition of InCISE.
   </div>
   <h5 id="data-title" class="mt-3">Data table</h5>
@@ -184,8 +184,8 @@
 </div>
 
 <div class="tab-pane fade " id="ref-panel">
-  <div class="alert alert-dismissible alert-light">
-    <button type="button" class="close" data-dismiss="alert">&times;</button>
+  <div class="alert alert-dismissible alert-light fade show help" id="metadata-alert">
+    <button type="button" class="close" id="metadata-close">&times;</button>
     <strong class="text-primary">Reference table:</strong> This table shows the refence metadata about the InCiSE index or the selected indicator. At the bottom of the table you can use the buttons to copy this table to the clipboard, download this specific table as a CSV file, or download a CSV file containing all the metadata from the 2019 edition of InCISE.
   </div>
   <h5 id="ref-title" class="mt-3">Reference table</h5>
@@ -375,6 +375,8 @@
 </div>
 </div>
 
+
+
 <script>
   var selectCtry = $('#select-country').selectize(
     {
@@ -528,7 +530,8 @@
           name: 'InCiSE average',
           type: 'scatterpolar',
           mode: 'lines+markers',
-          hoverinfo: "name+r",
+          hoverinfo: "none",
+          text: "InCiSE",
           theta: unpack(rows, 'graph_label'),
           r: unpack(rows, 'value'),
           marker: {
@@ -556,8 +559,8 @@
           mode: 'lines+markers',
           theta: unpack(rows, 'graph_label'),
           r: unpack(rows, 'value'),
-          hoverinfo: "r+theta+name",
-          text: "Score:" ,
+          hoverinfo: "none",
+          text: selectizeCountry.getItem(selectizeCountry.getValue()).text(),
           marker: {
             line: {width: 2, color: '#D53880'},
             size: 8,
@@ -900,7 +903,7 @@ function filter_table() {
 $(document).ready(
   plot_graphs(),
   filter_table(),
-  $("#welcome-modal").modal()
+  $("#welcome-modal").modal(),
 );
 
 $("#radar-tab").on('shown.bs.tab',function(){
@@ -951,34 +954,34 @@ $('#indicator-selector').hover(
   }
 )
 
-var active_tab = "Graphs";
-$('[data-toggle="tab"]').on('show.bs.tab', function(e){
-  active_tab = e.target.innerHTML;
-  show_help_text()
+$('#toggle-help').on('change', function(){
+  if ($('#toggle-help').prop('checked') == true) {
+    $(".alert").show()
+  } else {
+    $(".alert").hide()
+  }
+})
+
+$('.help > .close').click(function(data){
+  $('.help').hide();
+  $('#toggle-help').prop('checked', false)
 })
 
 
-function show_help_text() {
+$("#incise-graph").on('plotly_click', function(_,data){
 
-  var help_text = null
+  var trace_dat = data.points[0]
 
-  if (active_tab == "Graphs") {
-    help_text = "<ul><li>These graphs show the results for the InCiSE index or indicator you have selected.</li><li>The bar graph on the left shows the overall index or indicator scores for all 38 countries.</li><li>The radar graph on the right shows the results for the constituent components of the score - when the index is selected it will show you the scores for the 12 InCiSE indcators, when an indicator is selected it will show you the scores for the metrics that make up that indicator.</li><li>The radar chart shows the selected country's scores and the InCiSE average.</li><li>A radar point with a white fill means that the data for that data for the indicator/metric is missing for that country and has been imputed.</li></ul>"
-  } else if (active_tab == "Data") {
-    help_text = "This table shows the results for the selected indicator. At the bottom of the table you can use the buttons to copy this table to the clipboard, download this specific table as a CSV file, or download a CSV file containing all the data from the 2019 edition of InCISE."
-  } else if (active_tab == "Metadata") {
-    help_text = "This table shows the refence metadata about the InCiSE index or the selected indicator. At the bottom of the table you can use the buttons to copy this table to the clipboard, download this specific table as a CSV file, or download a CSV file containing all the metadata from the 2019 edition of InCISE."
+  var new_hover = null
+
+  if (trace_dat.curveNumber == 3 | trace_dat.curveNumber == 4)  {
+    Plotly.Fx.hover($("#incise-graph"), [
+      {curveNumber:trace_dat.curveNumber, pointNumber: trace_dat.pointNumber}
+    ])
+    $(".hovertext > .nums").html(trace_dat.pointNumber)
   }
 
-  if ($('#toggle-help').prop('checked') == true) {
-    $("#help-text").html(help_text)
-  } else {
-    $("#help-text").html("")
-  }
-}
 
-$('#toggle-help').on('change', function(){
-  show_help_text()
 })
 
 </script>
