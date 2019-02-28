@@ -27,9 +27,6 @@
   <script type="text/javascript" src="js/plotly-latest.min.js"></script>
 
   <style>
-  #incise-graph {
-    max-width: 1000px !important;
-  }
   #bar-container {
     min-height: 600px !important;
   }
@@ -231,8 +228,8 @@
       <li>A radar point with a white fill means that the data for that data for the indicator/metric is missing for that country and has been imputed.</li>
     </ul>
     </div>
-      <div id="graph-container" class="embed-responsive embed-responsive-4by3 text-center d-none d-md-block d-print-block">
-        <div id="incise-graph" class="embed-responsive-item"></div>
+      <div id="graph-container" class="text-center d-none d-md-block d-print-block">
+        <div id="incise-graph"></div>
     </div>
     <div id="bar-container" class="embed-responsive d-md-none d-print-none">
       <div id="incise-bar" class="embed-responsive-item"></div>
@@ -463,6 +460,20 @@
 
   var selectizeCountry = selectCtry[0].selectize;
   var selectizeIndicator = selectInd[0].selectize;
+
+  var sub_width = null
+  var sub_height = null
+
+  if ($(document).width() < 992) {
+    sub_width = 600;
+    sub_height = 450;
+  } else if ($(document).width() < 1200) {
+    sub_width = 800;
+    sub_height = 600;
+  } else{
+    sub_width = 800;
+    sub_height = 700;
+  }
 
   function plot_graphs() {
 
@@ -717,8 +728,6 @@
           var titleText = selectizeIndicator.getItem(selectizeIndicator.getValue()).text() + ": " + selectizeCountry.getItem(selectizeCountry.getValue()).text()
         }
 
-
-
         var sub_layout = {
           title: {
             text: titleText,
@@ -783,7 +792,7 @@
             gridshape: 'linear',
             domain: {
               x: [0.35, 1],
-              y: [0.05, 0.95]
+              y: [0.1, 0.9]
             },
             bgcolor: 'rgba(255,255,255,0)'
           },
@@ -796,7 +805,8 @@
           hovermode: 'closest',
           paper_bgcolor: '#fff',
           plot_bgcolor: '#fff',
-          autosize: true
+          width: sub_width,
+          height: sub_height
         }
 
         var sub_data = [base_bar, bar_incise, bar_country, radar_incise, radar_country, radar_impute]
@@ -806,7 +816,7 @@
         var radar_data = [radar_incise, radar_country, radar_impute]
 
         var plot_config = {
-          displayModeBar: true, autosizeable: true, responsive: true, displaylogo: false, modeBarButtonsToRemove:['select2d', 'zoom2d', 'lasso2d', 'zoomIn2d', 'zoomOut2d', 'hoverClosestCartesian', 'hoverCompareCartesian', 'toggleSpikelines', 'resetViews']};
+          displayModeBar: true, displaylogo: false, modeBarButtonsToRemove:['select2d', 'zoom2d', 'lasso2d', 'zoomIn2d', 'zoomOut2d', 'hoverClosestCartesian', 'hoverCompareCartesian', 'toggleSpikelines', 'resetViews']};
 
         Plotly.newPlot('incise-graph', sub_data, sub_layout, plot_config)
         Plotly.newPlot('incise-bar', bar_data, bar_layout, plot_config)
