@@ -27,12 +27,25 @@
   <script type="text/javascript" src="js/plotly-latest.min.js"></script>
 
   <style>
+  #incise-graph {
+    max-width: 1000px !important;
+  }
+  #bar-container {
+    min-height: 600px !important;
+  }
+  #radar-container {
+    min-height: 400px !important;
+  }
+  #incise-radar {
+    min-height: 400px !important;
+    min-width: 400px !important;
+  }
   </style>
 
 </head>
 <body>
 
-  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary sticky-top">
     <a class="navbar-brand mb-0 h1" href="#">Test results dashboard</a>
     <ul class = "nav nav-pills" id="incise-tab-nav" role="tablist">
       <li class="nav-item " id="graph-tab"><a id="graph-tab-link" class="nav-link active" data-toggle="tab" href="#graph-panel">Graphs</a></li>
@@ -216,9 +229,17 @@
       <li>The radar graph on the right shows the results for the constituent components of the score - when the index is selected it will show you the scores for the 12 InCiSE indcators, when an indicator is selected it will show you the scores for the metrics that make up that indicator.</li>
       <li>The radar chart shows the selected country's scores and the InCiSE average.</li>
       <li>A radar point with a white fill means that the data for that data for the indicator/metric is missing for that country and has been imputed.</li>
-  </ul>
-  </div>
-<div id="incise-graph" class="responsive-plot"></div>
+    </ul>
+    </div>
+      <div id="graph-container" class="embed-responsive embed-responsive-4by3 text-center d-none d-md-block d-print-block">
+        <div id="incise-graph" class="embed-responsive-item"></div>
+    </div>
+    <div id="bar-container" class="embed-responsive d-md-none d-print-none">
+      <div id="incise-bar" class="embed-responsive-item"></div>
+    </div>
+    <div id="radar-container" class="embed-responsive d-md-none d-print-none">
+      <div id="incise-radar" class="embed-responsive-item"></div>
+    </div>
 </div>
 
 <div class="tab-pane fade " id="data-panel">
@@ -227,7 +248,7 @@
     <strong class="text-primary">Data table:</strong> This table shows the results for the selected indicator. At the bottom of the table you can use the buttons to copy this table to the clipboard, download this specific table as a CSV file, or download a CSV file containing all the data from the 2019 edition of InCISE.
   </div>
   <h5 id="data-title" class="mt-3">Data table</h5>
-  <div class="table-responsive">
+  <div class="table-responsive-lg">
     <table id="incise-table" class="table table-striped"></table>
   </div>
 </div>
@@ -238,29 +259,29 @@
     <strong class="text-primary">Metadata:</strong> This table shows the refence metadata about the InCiSE index or the selected indicator. At the bottom of the table you can use the buttons to copy this table to the clipboard, download this specific table as a CSV file, or download a CSV file containing all the metadata from the 2019 edition of InCISE.
   </div>
   <h5 id="ref-title" class="mt-3">InCiSE metadata table</h5>
-  <div class="table-responsive">
+  <div class="table-responsive-lg">
     <table id="ref-table" class="table table-striped table-sm"></table>
   </div>
 </div>
 
 <div class="tab-pane fade" id="about-panel">
     <div class = "row">
-      <div class="col-4">
+      <div class="col-md-4">
         <h3>About InCiSE</h3>
         <p>The International Civil Service Effectiveness (InCiSE) Index was launched as a pilot in 2017, this dashboard shows the results from the section edition published in 2019. Recognising the important role civil services can play in helping their countries to prosper, InCiSE aims to assess how effectively civil services around the world perform and to identify in which areas their strengths lie relative to their international counterparts.</p>
         <p>InCiSE aspires progressively to become a robust, comparative measure of civil service performance, but is not that yet – mainly because of data limitations. In addition, InCiSE does not seek to be definitive: it will be important to assess its results alongside other evidence available to leaders and citizens. The InCiSE Index should be seen as one of a range of tools available to measure civil service effectiveness globally.</p>
         <p>InCiSE is a collaboration of the <a href="https://www.bsg.ox.ac.uk">Blavatnik School of Government</a> and the <a href="https://www.instituteforgovernment.org.uk/">Institute for Government</a>. It has been supported by the UK Civil Service and has recieved funding from the Open Society Foundations.</p>
       </div>
-      <div class="col-8"><h3>Methodology</h3>
+      <div class="col-md-8"><h3>Methodology</h3>
         <div class="row">
-          <div class="col">
+          <div class="col-sm">
       <p>The InCiSE index brings together data from a wide and varied range of sources. In their raw state these data not directly comparable, some data may be statistics or proportions, some might be ratings on different scales (e.g. 1 to 5 or 0 to 10), and some are categorical data. The InCiSE model processes and normalises the different types of data so that country performance in different domains can be compared. Full details of the methodology can be found in the InCiSE 2019 Technical Report.</p>
       <h5>InCiSE framework and model</h5>
       <p>The InCiSE index has been designed on a framework developed in discussion with officials from national governments, international organisations, civil society partners and academics. This framework defines 17 functions and attributes that contribute to civil service effectiveness - at present, due to data availability, only 12 have been included in the index. These functions and attributes, collectively called indicators, are then disaggregated into individual metrics.</p>
       <h5>Data sources</h5>
       <p>InCiSE draws on data from a wide range of data sources, and we are thankful to data providers for allowing the resuse of their data. A full list of data sources can be found below. InCiSE is built using the latest available data as of 30 Novmeber 2018.</p>
     </div>
-      <div class="col">
+      <div class="col-sm">
         <h5>Data quality and imputation</h5>
         <p>Not all sources cover all 38 countries included in the index, with data availability and quality varying across both countries and indicators. In some cases countries are missing just a few metrics for an indicator, while others are missing all data for a given indicator. In order to provide a practical tool for users, the InCiSE model uses multiple imputation to provide indicative scores for missing data points. These are clearly flagged on the graphs and tables in this dashboard.</p>
         <p>The InCiSE model has developed a data quality assessment which assesses the level of missing data for each country and indicator, and also accounts for whether data is from a public sector proxy and the recency of the data. This data quality assessment has been used to determine country coverage.</p>
@@ -272,7 +293,7 @@
   </div>
     <hr />
     <div class = "row">
-      <div class="col">
+      <div class="col-sm">
         <h5>Data Sources</h4>
         <small>
         <ul class="list-unstyled">
@@ -304,7 +325,7 @@
       </small>
 
       </div>
-      <div class="col"><h5>Software packages</h4>
+      <div class="col-sm"><h5>Software packages</h4>
         <p>The technical model and analysis for the 2019 edition of the InCiSE model was developed using R, a statistical programming language. This dashboard is developed using Plotly.JS, Datatables and Bootswatch.</p>
         <p>The R packages used in developing InCiSE are:</p>
         <small>
@@ -331,7 +352,7 @@
           </ul>
         </small>
       </div>
-      <div class="col"><h5>Country codes</h4>
+      <div class="col-sm order-first"><h5>Country codes</h4>
         <small>
         <dl class="row">
         <dt class="col-sm-3" style="text-align:right">AUS</dt>
@@ -445,7 +466,6 @@
 
   function plot_graphs() {
 
-
     Plotly.d3.json("data/test_graph.JSON", function(err, rows){
         function unpack(rows, key) {
             return rows.map(function(row) { return row[key]; });
@@ -541,14 +561,15 @@
 
         var bar_layout = {
           title: {
-            text: selectizeIndicator.getItem(selectizeIndicator.getValue()).text(),
+            text: selectizeIndicator.getItem(selectizeIndicator.getValue()).text() + ": overall score",
             x: 0,
-            xanchor: 'left'
+            xanchor: 'left',
+            font: {
+              size: 14
+            }
           },
-          width: 300,
-          height: 700,
           barmode: 'overlay',
-          autosize: 'true',
+          autosize: true,
           xaxis: {
             visible: true,
             range: [0,1],
@@ -560,16 +581,15 @@
             fixedrange: true
           },
           yaxis: {
-            title: 'Country',
             fixedrange: true,
             type: 'category',
             showticklabels: true,
             tickmode: 'linear',
             tickfont: {
-              size: 12
+              size: 10
             }
           },
-          showlegend: true,
+          showlegend: false,
           legend: {
             "orientation" : 'h'
           }
@@ -656,6 +676,14 @@
         }
 
         var radar_layout = {
+          title: {
+            text: selectizeIndicator.getItem(selectizeIndicator.getValue()).text() + ": component scores",
+            x: 0,
+            xanchor: 'left',
+            font: {
+              size: 14
+            }
+          },
           polar: {
             radialaxis: {
               range: [0, 1.1],
@@ -676,9 +704,11 @@
             },
             gridshape: 'linear'
           },
-          showlegend: true,
-          width: 700,
-          height: 700,
+          showlegend: false,
+          autosize: true,
+          font: {
+            size: 10
+          }
         }
 
         if (selectizeCountry.getValue() == "") {
@@ -705,8 +735,6 @@
             xshift: 0,
             yshift: 0
           }],
-          width: 800,
-          height: 700,
           barmode: 'overlay',
           autosize: 'true',
           xaxis: {
@@ -755,7 +783,7 @@
             gridshape: 'linear',
             domain: {
               x: [0.35, 1],
-              y: [0, 1]
+              y: [0.05, 0.95]
             },
             bgcolor: 'rgba(255,255,255,0)'
           },
@@ -768,14 +796,21 @@
           hovermode: 'closest',
           paper_bgcolor: '#fff',
           plot_bgcolor: '#fff',
+          autosize: true
         }
 
         var sub_data = [base_bar, bar_incise, bar_country, radar_incise, radar_country, radar_impute]
 
-        var sub_config = {
-          displayModeBar: true, responsive: true, displaylogo: false, modeBarButtonsToRemove:['select2d', 'zoom2d', 'lasso2d', 'zoomIn2d', 'zoomOut2d', 'hoverClosestCartesian', 'hoverCompareCartesian', 'toggleSpikelines', 'resetViews']}
+        var bar_data = [base_bar, bar_incise, bar_country]
 
-        Plotly.newPlot('incise-graph', sub_data, sub_layout, sub_config)
+        var radar_data = [radar_incise, radar_country, radar_impute]
+
+        var plot_config = {
+          displayModeBar: true, autosizeable: true, responsive: true, displaylogo: false, modeBarButtonsToRemove:['select2d', 'zoom2d', 'lasso2d', 'zoomIn2d', 'zoomOut2d', 'hoverClosestCartesian', 'hoverCompareCartesian', 'toggleSpikelines', 'resetViews']};
+
+        Plotly.newPlot('incise-graph', sub_data, sub_layout, plot_config)
+        Plotly.newPlot('incise-bar', bar_data, bar_layout, plot_config)
+        Plotly.newPlot('incise-radar', radar_data, radar_layout, plot_config)
 
     });
 
@@ -950,9 +985,11 @@ function filter_table() {
 
 
 $(document).ready(
+  // $("#incise-graph").height($("#graph-container").height()),
   $("#welcome-modal").modal(),
   plot_graphs(),
-  filter_table()
+  filter_table(),
+  sticky_nav()
 );
 
 $("#graph-tab").on('shown.bs.tab',function(){
@@ -961,10 +998,16 @@ $("#graph-tab").on('shown.bs.tab',function(){
 
 $("#about-tab").on('shown.bs.tab',function(){
   $("#incise-controls").fadeOut();
+  if($(document).width() < 992) {
+    $("#incise-sidebar").hide()
+  }
 });
 
 $("#about-tab").on('hide.bs.tab',function(){
   $("#incise-controls").fadeIn();
+  if($(document).width() < 992) {
+    $("#incise-sidebar").show()
+  }
 });
 
 $('#data-tab').hover(
@@ -979,6 +1022,19 @@ $('#data-tab').hover(
 )
 
 $("#incise-graph").on('plotly_click', function(_, data){
+  var country = data.points[0].y
+
+  if ((typeof country) != "undefined") {
+    if (country != "InCiSE") {
+      selectizeCountry.setValue(country);
+      plot_graphs();
+      filter_table();
+    }
+  }
+
+})
+
+$("#incise-bar").on('plotly_click', function(_, data){
   var country = data.points[0].y
 
   if ((typeof country) != "undefined") {
@@ -1019,7 +1075,17 @@ $('.help > .close').click(function(data){
   $('#toggle-help').prop('checked', false)
 })
 
+function sticky_nav() {
+  if ($(document).width() < 768) {
+    $(".navbar").removeClass("sticky-top");
+  } else {
+    $(".navbar").addClass("sticky-top");
+  }
+}
 
+$(window).resize(function(){
+  sticky_nav()
+})
 
 </script>
 
