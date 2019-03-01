@@ -467,6 +467,8 @@
     var second_colour = "#2166ac"
     var incise_colour = "#757575"
 
+    var graph_font = $("body").css("font-family")
+
     Plotly.d3.json("data/test_graph.JSON", function(err, rows){
         function unpack(rows, key) {
             return rows.map(function(row) { return row[key]; });
@@ -572,6 +574,10 @@
         }
 
         var bar_layout = {
+          font: {
+            family: graph_font,
+            size: 10
+          },
           title: {
             text: selectizeIndicator.getItem(selectizeIndicator.getValue()).text() + ": overall score",
             x: 0,
@@ -596,10 +602,7 @@
             fixedrange: true,
             type: 'category',
             showticklabels: true,
-            tickmode: 'linear',
-            tickfont: {
-              size: 10
-            }
+            tickmode: 'linear'
           },
           showlegend: false,
           legend: {
@@ -719,6 +722,7 @@
           showlegend: false,
           autosize: true,
           font: {
+            family: graph_font,
             size: 10
           }
         }
@@ -730,6 +734,9 @@
         }
 
         var sub_layout = {
+          font: {
+            family: graph_font
+          },
           title: {
             text: titleText,
             x: 0.05,
