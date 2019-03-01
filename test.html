@@ -724,7 +724,8 @@
           font: {
             family: graph_font,
             size: 10
-          }
+          },
+          dragmode: false
         }
 
         if (selectizeCountry.getValue() == "") {
@@ -814,7 +815,8 @@
           paper_bgcolor: '#fff',
           plot_bgcolor: '#fff',
           width: sub_width,
-          height: sub_height
+          height: sub_height,
+          dragmode: false
         }
 
         var sub_data = [base_bar, bar_incise, bar_country, radar_incise, radar_country, radar_impute]
