@@ -71,7 +71,7 @@
           <p>Use the controls below to select a country and to switch between the InCiSE index and its constituent indicators.</p>
           <p>Use the buttons at the top of the page to switch between graphs, data and metadata. The data tab will be enabled when you select a country.</p>
         </div>
-        <div class="modal-footer small">
+        <div class="modal-footer small bg-light">
           <button type="button" class="btn btn-sm btn-outline-secondary" data-dismiss="modal">Close</button>
           <button type="button" class="btn btn-sm btn-info" id="welcome-more-btn">Read more</button>
         </div>
@@ -120,7 +120,7 @@
           <h5>About</h5>
           <p>The about tab provides some general background about the InCiSE project and its methodology.</p>
         </div>
-        <div class="modal-footer small">
+        <div class="modal-footer small bg-light">
           <button type="button" class="btn btn-sm btn-outline-secondary" data-dismiss="modal">Close</button>
         </div>
       </div>
@@ -477,6 +477,9 @@
 
   function plot_graphs() {
 
+    var country_colour = "#8c510a"
+    var incise_colour = "#5ab4ac"
+
     Plotly.d3.json("data/test_graph.JSON", function(err, rows){
         function unpack(rows, key) {
             return rows.map(function(row) { return row[key]; });
@@ -518,7 +521,7 @@
           type: 'bar',
           orientation: 'h',
           marker: {
-            color: '#757575'
+            color: incise_colour
           },
           transforms: [{
             type: 'filter',
@@ -549,7 +552,7 @@
           type: 'bar',
           orientation: 'h',
           marker: {
-            color: '#D53880'
+            color: country_colour
           },
           transforms: [{
             type: 'filter',
@@ -614,9 +617,9 @@
           theta: unpack(rows, 'graph_label'),
           r: unpack(rows, 'value'),
           marker: {
-            line: {width: 2, color: '#757575'},
+            line: {width: 2, color: incise_colour},
             size: 6,
-            color: '#757575'
+            color: incise_colour
           },
           transforms: [{
             type: 'filter',
@@ -640,9 +643,9 @@
           r: unpack(rows, 'value'),
           hoverinfo: "name+r",
           marker: {
-            line: {width: 2, color: '#D53880'},
+            line: {width: 2, color: country_colour},
             size: 8,
-            color: '#D53880'
+            color: country_colour
           },
           transforms: [{
             type: 'filter',
@@ -668,7 +671,7 @@
           r: unpack(rows, 'impute'),
           marker: {
             symbol: 0,
-            line: {color: '#d53880', width: 2},
+            line: {color: country_colour, width: 2},
             size: 8,
             color: '#ffffff'
           },
