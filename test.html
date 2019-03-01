@@ -461,21 +461,18 @@
   var selectizeCountry = selectCtry[0].selectize;
   var selectizeIndicator = selectInd[0].selectize;
 
-  var sub_width = null
-  var sub_height = null
-
-  if ($(document).width() < 992) {
-    sub_width = 600;
-    sub_height = 450;
-  } else if ($(document).width() < 1200) {
-    sub_width = 800;
-    sub_height = 600;
-  } else{
-    sub_width = 800;
-    sub_height = 700;
-  }
-
   function plot_graphs() {
+
+    var sub_width = null
+    var sub_height = null
+
+    if ($(document).width() < 850) {
+      sub_width = 750;
+      sub_height = 700;
+    } else if ($(document).width() < 1200) {
+      sub_width = 800;
+      sub_height = 700;
+    }
 
     var country_colour = "#8c510a"
     var incise_colour = "#5ab4ac"
@@ -1096,9 +1093,17 @@ function sticky_nav() {
   }
 }
 
+function purge_plots() {
+  Plotly.purge("incise-graph");
+  Plotly.purge("incise-bar");
+  Plotly.purge("incise-radar");
+}
+
 $(window).resize(function(){
-  sticky_nav()
-})
+  purge_plots();
+  plot_graphs();
+  sticky_nav();
+});
 
 </script>
 
