@@ -127,7 +127,7 @@ function plot_graphs() {
           type: 'filter',
           target: unpack(rows, 'score'),
           operation: '==',
-          value: selectizeIndicator.getValue()
+          value: "OVERALL"
         }, {
           type: 'sort',
           target: 'x',
@@ -155,7 +155,7 @@ function plot_graphs() {
           type: 'filter',
           target: unpack(rows, 'score'),
           operation: '=',
-          value: selectizeIndicator.getValue()
+          value: "OVERALL"
         }, {
           type: 'filter',
           target: unpack(rows, 'cc_iso3c'),
@@ -186,12 +186,12 @@ function plot_graphs() {
           type: 'filter',
           target: unpack(rows, 'score'),
           operation: '=',
-          value: selectizeIndicator.getValue()
+          value:"OVERALL"
         }, {
           type: 'filter',
           target: unpack(rows, 'cc_iso3c'),
           operation: '=',
-          value: selectizeCountry.getValue()
+          value: "OVERALL"
         }, {
           type: 'sort',
           target: 'x',
@@ -207,7 +207,7 @@ function plot_graphs() {
           size: 10
         },
         title: {
-          text: selectizeIndicator.getItem(selectizeIndicator.getValue()).text() + ": overall score",
+          text: "InCiSE index: overall score",
           x: 0,
           xanchor: 'left',
           font: {
@@ -254,7 +254,7 @@ function plot_graphs() {
           type: 'filter',
           target: unpack(rows, 'indicator'),
           operation: '=',
-          value: selectizeIndicator.getValue()
+          value: "OVERALL"
         }, {
           type: 'filter',
           target: unpack(rows, 'cc_iso3c'),
@@ -280,7 +280,7 @@ function plot_graphs() {
           type: 'filter',
           target: unpack(rows, 'indicator'),
           operation: '=',
-          value: selectizeIndicator.getValue()
+          value: "OVERALL"
         }, {
           type: 'filter',
           target: unpack(rows, 'cc_iso3c'),
@@ -308,7 +308,7 @@ function plot_graphs() {
           type: 'filter',
           target: unpack(rows, 'indicator'),
           operation: '=',
-          value: selectizeIndicator.getValue()
+          value: "OVERALL"
         }, {
           type: 'filter',
           target: unpack(rows, 'cc_iso3c'),
@@ -320,7 +320,7 @@ function plot_graphs() {
 
       var radar_layout = {
         title: {
-          text: selectizeIndicator.getItem(selectizeIndicator.getValue()).text() + ": component scores",
+          text: "InCiSE index: component scores",
           x: 0,
           xanchor: 'left',
           font: {
@@ -356,9 +356,9 @@ function plot_graphs() {
       }
 
       if (selectizeCountry.getValue() == "") {
-        var titleText = selectizeIndicator.getItem(selectizeIndicator.getValue()).text()
+        var titleText = "InCiSE index overall results"
       } else {
-        var titleText = selectizeIndicator.getItem(selectizeIndicator.getValue()).text() + ": " + selectizeCountry.getItem(selectizeCountry.getValue()).text()
+        var titleText = "InCiSE index: " + selectizeCountry.getItem(selectizeCountry.getValue()).text()
       }
 
       var sub_layout = {
