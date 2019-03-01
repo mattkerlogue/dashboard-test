@@ -463,6 +463,17 @@
 
   function plot_graphs() {
 
+    var sub_width = null
+    var sub_height = null
+
+    if ($(document).width() < 850) {
+      sub_width = 750;
+      sub_height = 700;
+    } else if ($(document).width() < 1200) {
+      sub_width = 800;
+      sub_height = 700;
+    }
+
     var country_colour = "#8c510a"
     var incise_colour = "#5ab4ac"
 
