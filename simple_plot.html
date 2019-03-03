@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="en">
+
 <head>
 
   <meta charset="utf-8" />
@@ -10,10 +11,10 @@
 
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-  <link rel="stylesheet", type="text/css" href="css/selectize.css" />
+  <link rel="stylesheet" , type="text/css" href="css/selectize.css" />
 
 
-  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.18/b-1.5.4/b-flash-1.5.4/b-html5-1.5.4/b-print-1.5.4/datatables.min.css"/>
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.18/b-1.5.4/b-flash-1.5.4/b-html5-1.5.4/b-print-1.5.4/datatables.min.css" />
 
 
   <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
@@ -26,459 +27,471 @@
   <script type="text/javascript" src="js/plotly-latest.min.js"></script>
 
 </head>
+
 <body>
   <div class="container-fluid" style="width:800">
     <div class="row">
       <div class="col">
         <div id="country-selector">
-        <label for="select-country">Select a country:</label>
-        <select id="select-country">
-          <option disabled selected value="">Select a country:</option>
-          <option value="BDG">BDG</option>
-          <option value="BKV">BKV</option>
-          <option value="CHQ">CHQ</option>
-          <option value="CPJ">CPJ</option>
-          <option value="FTG">FTG</option>
-          <option value="GIP">GIP</option>
-          <option value="GSA">GSA</option>
-          <option value="GUJ">GUJ</option>
-          <option value="GUX">GUX</option>
-          <option value="HEU">HEU</option>
-          <option value="HUQ">HUQ</option>
-          <option value="IJM">IJM</option>
-          <option value="INZ">INZ</option>
-          <option value="JDH">JDH</option>
-          <option value="JYK">JYK</option>
-          <option value="KBJ">KBJ</option>
-          <option value="KVY">KVY</option>
-          <option value="LFO">LFO</option>
-          <option value="LGM">LGM</option>
-          <option value="MLV">MLV</option>
-          <option value="MMR">MMR</option>
-          <option value="MOQ">MOQ</option>
-          <option value="NPE">NPE</option>
-          <option value="OES">OES</option>
-          <option value="ONU">ONU</option>
-          <option value="QKB">QKB</option>
-          <option value="QNT">QNT</option>
-          <option value="RNZ">RNZ</option>
-          <option value="SHB">SHB</option>
-          <option value="TQN">TQN</option>
-          <option value="TRU">TRU</option>
-          <option value="UQB">UQB</option>
-          <option value="UYD">UYD</option>
-          <option value="VFC">VFC</option>
-          <option value="VLO">VLO</option>
-          <option value="VQC">VQC</option>
-          <option value="YGT">YGT</option>
-          <option value="YRO">YRO</option>
-        </select>
-      </div>
-      <div id="incise-graph" class="responsive-plot"></div>
+          <label for="select-country">Select a country:</label>
+          <select id="select-country">
+            <option disabled selected value="">Select a country:</option>
+            <option value="BDG">BDG</option>
+            <option value="BKV">BKV</option>
+            <option value="CHQ">CHQ</option>
+            <option value="CPJ">CPJ</option>
+            <option value="FTG">FTG</option>
+            <option value="GIP">GIP</option>
+            <option value="GSA">GSA</option>
+            <option value="GUJ">GUJ</option>
+            <option value="GUX">GUX</option>
+            <option value="HEU">HEU</option>
+            <option value="HUQ">HUQ</option>
+            <option value="IJM">IJM</option>
+            <option value="INZ">INZ</option>
+            <option value="JDH">JDH</option>
+            <option value="JYK">JYK</option>
+            <option value="KBJ">KBJ</option>
+            <option value="KVY">KVY</option>
+            <option value="LFO">LFO</option>
+            <option value="LGM">LGM</option>
+            <option value="MLV">MLV</option>
+            <option value="MMR">MMR</option>
+            <option value="MOQ">MOQ</option>
+            <option value="NPE">NPE</option>
+            <option value="OES">OES</option>
+            <option value="ONU">ONU</option>
+            <option value="QKB">QKB</option>
+            <option value="QNT">QNT</option>
+            <option value="RNZ">RNZ</option>
+            <option value="SHB">SHB</option>
+            <option value="TQN">TQN</option>
+            <option value="TRU">TRU</option>
+            <option value="UQB">UQB</option>
+            <option value="UYD">UYD</option>
+            <option value="VFC">VFC</option>
+            <option value="VLO">VLO</option>
+            <option value="VQC">VQC</option>
+            <option value="YGT">YGT</option>
+            <option value="YRO">YRO</option>
+          </select>
+        </div>
+        <div id="incise-graph" class="responsive-plot"></div>
       </div>
     </div>
   </div>
 
-<script>
-var selectCtry = $('#select-country').selectize(
-  {
-    allowEmptyOption: true,
-    onChange: function (value) {plot_graphs();}
-    }
-);
-
-var selectizeCountry = selectCtry[0].selectize;
-
-function plot_graphs() {
-
-  var country_colour = "#d73027"
-  var second_colour = "#2166ac"
-  var incise_colour = "#757575"
-
-  var graph_font = $("body").css("font-family")
-
-  Plotly.d3.json("data/test_graph.JSON", function(err, rows){
-      function unpack(rows, key) {
-          return rows.map(function(row) { return row[key]; });
+  <script>
+    var selectCtry = $('#select-country').selectize({
+      allowEmptyOption: true,
+      onChange: function(value) {
+        plot_graphs();
       }
+    });
 
-      var sub_width = null
-      var sub_height = null
+    var selectizeCountry = selectCtry[0].selectize;
 
-      if ($(document).width() < 1100) {
-        sub_width = 750;
-        sub_height = 700;
-      } else{
-        sub_width = 850;
-        sub_height = 700;
-      }
+    function plot_graphs() {
 
-      var base_bar = {
-        name: "All countries",
-        y: unpack(rows, 'cc_iso3c'),
-        x: unpack(rows, 'value'),
-        mode: 'markers',
-        type: 'bar',
-        orientation: 'h',
-        marker: {
-          color: '#cccccc'
-        },
-        transforms: [{
-          type: 'filter',
-          target: unpack(rows, 'score'),
-          operation: '==',
-          value: "OVERALL"
-        }, {
-          type: 'sort',
-          target: 'x',
-          order: 'ascending'
+      var country_colour = "#d73027"
+      var second_colour = "#2166ac"
+      var incise_colour = "#757575"
+
+      var graph_font = $("body").css("font-family")
+
+      Plotly.d3.json("data/test_graph.JSON", function(err, rows) {
+        function unpack(rows, key) {
+          return rows.map(function(row) {
+            return row[key];
+          });
         }
-      ],
-      hoverinfo: 'x',
-      hoverlabel: {
-        bgcolor: '#333333',
-        bordercolor: '#ffffff',
-      }
-      }
 
-      var bar_incise = {
-        name: "InCiSE average",
-        y: unpack(rows, 'cc_iso3c'),
-        x: unpack(rows, 'value'),
-        mode: 'markers',
-        type: 'bar',
-        orientation: 'h',
-        marker: {
-          color: incise_colour
-        },
-        transforms: [{
-          type: 'filter',
-          target: unpack(rows, 'score'),
-          operation: '=',
-          value: "OVERALL"
-        }, {
-          type: 'filter',
-          target: unpack(rows, 'cc_iso3c'),
-          operation: '=',
-          value: "InCiSE"
-        }, {
-          type: 'sort',
-          target: 'x',
-          order: 'ascending'
+        var sub_width = null
+        var sub_height = null
+
+        if ($(document).width() < 1100) {
+          sub_width = 750;
+          sub_height = 700;
+        } else {
+          sub_width = 850;
+          sub_height = 700;
         }
-      ],
-      hoverinfo: 'skip'
-      }
 
-      var bar_country = {
-        name: selectizeCountry.getItem(selectizeCountry.getValue()).text(),
-        y: unpack(rows, 'cc_iso3c'),
-        x: unpack(rows, 'value'),
-        mode: 'markers+text',
-        text: 'x',
-        textposition: 'right',
-        type: 'bar',
-        orientation: 'h',
-        marker: {
-          color: country_colour
-        },
-        transforms: [{
-          type: 'filter',
-          target: unpack(rows, 'score'),
-          operation: '=',
-          value:"OVERALL"
-        }, {
-          type: 'filter',
-          target: unpack(rows, 'cc_iso3c'),
-          operation: '=',
-          value: "OVERALL"
-        }, {
-          type: 'sort',
-          target: 'x',
-          order: 'ascending'
-        }
-      ],
-      hoverinfo: 'skip'
-      }
-
-      var bar_layout = {
-        font: {
-          family: graph_font,
-          size: 10
-        },
-        title: {
-          text: "InCiSE index: overall score",
-          x: 0,
-          xanchor: 'left',
-          font: {
-            size: 14
+        var base_bar = {
+          name: "All countries",
+          y: unpack(rows, 'cc_iso3c'),
+          x: unpack(rows, 'value'),
+          mode: 'markers',
+          type: 'bar',
+          orientation: 'h',
+          marker: {
+            color: '#cccccc'
+          },
+          transforms: [{
+            type: 'filter',
+            target: unpack(rows, 'score'),
+            operation: '==',
+            value: "OVERALL"
+          }, {
+            type: 'sort',
+            target: 'x',
+            order: 'ascending'
+          }],
+          hoverinfo: 'x',
+          hoverlabel: {
+            bgcolor: '#333333',
+            bordercolor: '#ffffff',
           }
-        },
-        barmode: 'overlay',
-        autosize: true,
-        xaxis: {
-          visible: true,
-          range: [0,1],
-          tickmode: 'array',
-          tickvals: [0,0.25,0.5,0.75,1],
-          showgrid: true,
-          title: '',
-          zeroline: true,
-          fixedrange: true
-        },
-        yaxis: {
-          fixedrange: true,
-          type: 'category',
-          showticklabels: true,
-          tickmode: 'linear'
-        },
-        showlegend: false,
-        legend: {
-          "orientation" : 'h'
         }
-      }
 
-      var radar_incise = {
-        name: 'InCiSE average',
-        type: 'scatterpolar',
-        mode: 'lines+markers',
-        hoverinfo: "name+r",
-        theta: unpack(rows, 'graph_label'),
-        r: unpack(rows, 'value'),
-        marker: {
-          line: {width: 2, color: incise_colour},
-          size: 4,
-          color: incise_colour
-        },
-        transforms: [{
-          type: 'filter',
-          target: unpack(rows, 'indicator'),
-          operation: '=',
-          value: "OVERALL"
-        }, {
-          type: 'filter',
-          target: unpack(rows, 'cc_iso3c'),
-          operation: '=',
-          value: "InCiSE"
-        }],
-        showlegend: false
-      }
+        var bar_incise = {
+          name: "InCiSE average",
+          y: unpack(rows, 'cc_iso3c'),
+          x: unpack(rows, 'value'),
+          mode: 'markers',
+          type: 'bar',
+          orientation: 'h',
+          marker: {
+            color: incise_colour
+          },
+          transforms: [{
+            type: 'filter',
+            target: unpack(rows, 'score'),
+            operation: '=',
+            value: "OVERALL"
+          }, {
+            type: 'filter',
+            target: unpack(rows, 'cc_iso3c'),
+            operation: '=',
+            value: "InCiSE"
+          }, {
+            type: 'sort',
+            target: 'x',
+            order: 'ascending'
+          }],
+          hoverinfo: 'skip'
+        }
 
-      var radar_country = {
-        name: selectizeCountry.getItem(selectizeCountry.getValue()).text(),
-        type: 'scatterpolar',
-        mode: 'lines+markers',
-        theta: unpack(rows, 'graph_label'),
-        r: unpack(rows, 'value'),
-        hoverinfo: "name+r",
-        marker: {
-          line: {width: 2, color: country_colour},
-          size: 8,
-          color: country_colour
-        },
-        transforms: [{
-          type: 'filter',
-          target: unpack(rows, 'indicator'),
-          operation: '=',
-          value: "OVERALL"
-        }, {
-          type: 'filter',
-          target: unpack(rows, 'cc_iso3c'),
-          operation: '=',
-          value: selectizeCountry.getValue()
-        }],
-        showlegend: false
-      }
+        var bar_country = {
+          name: selectizeCountry.getItem(selectizeCountry.getValue()).text(),
+          y: unpack(rows, 'cc_iso3c'),
+          x: unpack(rows, 'value'),
+          mode: 'markers+text',
+          text: 'x',
+          textposition: 'right',
+          type: 'bar',
+          orientation: 'h',
+          marker: {
+            color: country_colour
+          },
+          transforms: [{
+            type: 'filter',
+            target: unpack(rows, 'score'),
+            operation: '=',
+            value: "OVERALL"
+          }, {
+            type: 'filter',
+            target: unpack(rows, 'cc_iso3c'),
+            operation: '=',
+            value: "OVERALL"
+          }, {
+            type: 'sort',
+            target: 'x',
+            order: 'ascending'
+          }],
+          hoverinfo: 'skip'
+        }
 
-      var radar_impute = {
-        name: 'Imputed results',
-        type: 'scatterpolar',
-        mode: 'markers',
-        hoverinfo: 'text',
-        text: "Imputed score",
-        theta: unpack(rows, 'graph_label'),
-        r: unpack(rows, 'impute'),
-        marker: {
-          symbol: 0,
-          line: {color: country_colour, width: 2},
-          size: 8,
-          color: '#ffffff'
-        },
-        transforms: [{
-          type: 'filter',
-          target: unpack(rows, 'indicator'),
-          operation: '=',
-          value: "OVERALL"
-        }, {
-          type: 'filter',
-          target: unpack(rows, 'cc_iso3c'),
-          operation: '=',
-          value: selectizeCountry.getValue()
-        }],
-        showlegend: true
-      }
-
-      var radar_layout = {
-        title: {
-          text: "InCiSE index: component scores",
-          x: 0,
-          xanchor: 'left',
+        var bar_layout = {
           font: {
-            size: 14
-          }
-        },
-        polar: {
-          radialaxis: {
-            range: [0, 1.1],
+            family: graph_font,
+            size: 10
+          },
+          title: {
+            text: "InCiSE index: overall score",
+            x: 0,
+            xanchor: 'left',
+            font: {
+              size: 14
+            }
+          },
+          barmode: 'overlay',
+          autosize: true,
+          xaxis: {
             visible: true,
-            tick0: 0,
-            dtick: 0.25,
-            ticks: "",
-            showline: false,
-            showticklabels: false,
+            range: [0, 1],
+            tickmode: 'array',
+            tickvals: [0, 0.25, 0.5, 0.75, 1],
+            showgrid: true,
+            title: '',
+            zeroline: true,
             fixedrange: true
           },
-          angularaxis: {
-            direction: 'clockwise',
-            rotation: 75,
-            showline: false,
+          yaxis: {
             fixedrange: true,
-            ticks: ""
+            type: 'category',
+            showticklabels: true,
+            tickmode: 'linear'
           },
-          gridshape: 'linear'
-        },
-        showlegend: false,
-        autosize: true,
-        font: {
-          family: graph_font,
-          size: 10
+          showlegend: false,
+          legend: {
+            "orientation": 'h'
+          }
         }
-      }
 
-      if (selectizeCountry.getValue() == "") {
-        var titleText = "InCiSE index overall results"
-      } else {
-        var titleText = "InCiSE index: " + selectizeCountry.getItem(selectizeCountry.getValue()).text()
-      }
-
-      var sub_layout = {
-        font: {
-          family: graph_font
-        },
-        title: {
-          text: titleText,
-          x: 0.05,
-          xanchor: 'left'
-        },
-        annotations: [{
-          "text": 'Source: International Civil Service Effectiveness Index (InCiSE) Index 2019',
-          xref: "paper",
-          x: 1.1,
-          yref: "paper",
-          y: -0.1,
-          showarrow: false,
-          xshift: 0,
-          yshift: 0
-        }],
-        barmode: 'overlay',
-        autosize: 'true',
-        xaxis: {
-          visible: true,
-          range: [0,1],
-          tickmode: 'array',
-          tickvals: [0,0.25,0.5,0.75,1],
-          showgrid: true,
-          title: '',
-          hoverformat: '.2f',
-          zeroline: true,
-          fixedrange: true,
-          domain: [0, 0.3]
-        },
-        yaxis: {
-          title: '',
-          fixedrange: true,
-          type: 'category',
-          showticklabels: true,
-          tickmode: 'linear',
-          tickfont: {
-            size: 12
+        var radar_incise = {
+          name: 'InCiSE average',
+          type: 'scatterpolar',
+          mode: 'lines+markers',
+          hoverinfo: "name+r",
+          theta: unpack(rows, 'graph_label'),
+          r: unpack(rows, 'value'),
+          marker: {
+            line: {
+              width: 2,
+              color: incise_colour
+            },
+            size: 4,
+            color: incise_colour
           },
-          domain: [0, 1],
-          automargin: true
-        },
-        polar: {
-          radialaxis: {
-            range: [0, 1.1],
+          transforms: [{
+            type: 'filter',
+            target: unpack(rows, 'indicator'),
+            operation: '=',
+            value: "OVERALL"
+          }, {
+            type: 'filter',
+            target: unpack(rows, 'cc_iso3c'),
+            operation: '=',
+            value: "InCiSE"
+          }],
+          showlegend: false
+        }
+
+        var radar_country = {
+          name: selectizeCountry.getItem(selectizeCountry.getValue()).text(),
+          type: 'scatterpolar',
+          mode: 'lines+markers',
+          theta: unpack(rows, 'graph_label'),
+          r: unpack(rows, 'value'),
+          hoverinfo: "name+r",
+          marker: {
+            line: {
+              width: 2,
+              color: country_colour
+            },
+            size: 8,
+            color: country_colour
+          },
+          transforms: [{
+            type: 'filter',
+            target: unpack(rows, 'indicator'),
+            operation: '=',
+            value: "OVERALL"
+          }, {
+            type: 'filter',
+            target: unpack(rows, 'cc_iso3c'),
+            operation: '=',
+            value: selectizeCountry.getValue()
+          }],
+          showlegend: false
+        }
+
+        var radar_impute = {
+          name: 'Imputed results',
+          type: 'scatterpolar',
+          mode: 'markers',
+          hoverinfo: 'text',
+          text: "Imputed score",
+          theta: unpack(rows, 'graph_label'),
+          r: unpack(rows, 'impute'),
+          marker: {
+            symbol: 0,
+            line: {
+              color: country_colour,
+              width: 2
+            },
+            size: 8,
+            color: '#ffffff'
+          },
+          transforms: [{
+            type: 'filter',
+            target: unpack(rows, 'indicator'),
+            operation: '=',
+            value: "OVERALL"
+          }, {
+            type: 'filter',
+            target: unpack(rows, 'cc_iso3c'),
+            operation: '=',
+            value: selectizeCountry.getValue()
+          }],
+          showlegend: true
+        }
+
+        var radar_layout = {
+          title: {
+            text: "InCiSE index: component scores",
+            x: 0,
+            xanchor: 'left',
+            font: {
+              size: 14
+            }
+          },
+          polar: {
+            radialaxis: {
+              range: [0, 1.1],
+              visible: true,
+              tick0: 0,
+              dtick: 0.25,
+              ticks: "",
+              showline: false,
+              showticklabels: false,
+              fixedrange: true
+            },
+            angularaxis: {
+              direction: 'clockwise',
+              rotation: 75,
+              showline: false,
+              fixedrange: true,
+              ticks: ""
+            },
+            gridshape: 'linear'
+          },
+          showlegend: false,
+          autosize: true,
+          font: {
+            family: graph_font,
+            size: 10
+          }
+        }
+
+        if (selectizeCountry.getValue() == "") {
+          var titleText = "InCiSE index overall results"
+        } else {
+          var titleText = "InCiSE index: " + selectizeCountry.getItem(selectizeCountry.getValue()).text()
+        }
+
+        var sub_layout = {
+          font: {
+            family: graph_font
+          },
+          title: {
+            text: titleText,
+            x: 0.05,
+            xanchor: 'left'
+          },
+          annotations: [{
+            "text": 'Source: International Civil Service Effectiveness Index (InCiSE) Index 2019',
+            xref: "paper",
+            x: 1.1,
+            yref: "paper",
+            y: -0.1,
+            showarrow: false,
+            xshift: 0,
+            yshift: 0
+          }],
+          barmode: 'overlay',
+          autosize: 'true',
+          xaxis: {
             visible: true,
-            tick0: 0,
-            dtick: 0.25,
-            ticks: "",
+            range: [0, 1],
+            tickmode: 'array',
+            tickvals: [0, 0.25, 0.5, 0.75, 1],
+            showgrid: true,
+            title: '',
             hoverformat: '.2f',
-            showline: false,
-            showticklabels: false,
-            fixedrange: true
-          },
-          angularaxis: {
-            direction: 'clockwise',
-            rotation: 75,
-            showline: false,
+            zeroline: true,
             fixedrange: true,
-            ticks: ""
+            domain: [0, 0.3]
           },
-          gridshape: 'linear',
-          domain: {
-            x: [0.35, 1],
-            y: [0.1, 0.9]
+          yaxis: {
+            title: '',
+            fixedrange: true,
+            type: 'category',
+            showticklabels: true,
+            tickmode: 'linear',
+            tickfont: {
+              size: 12
+            },
+            domain: [0, 1],
+            automargin: true
           },
-          bgcolor: 'rgba(255,255,255,0)'
-        },
-        showlegend: true,
-        legend: {
-          "orientation" : 'h',
-          y: 1.1,
-          x: 0.95
-        },
-        hovermode: 'closest',
-        paper_bgcolor: '#fff',
-        plot_bgcolor: '#fff',
-        width: sub_width,
-        height: sub_height
+          polar: {
+            radialaxis: {
+              range: [0, 1.1],
+              visible: true,
+              tick0: 0,
+              dtick: 0.25,
+              ticks: "",
+              hoverformat: '.2f',
+              showline: false,
+              showticklabels: false,
+              fixedrange: true
+            },
+            angularaxis: {
+              direction: 'clockwise',
+              rotation: 75,
+              showline: false,
+              fixedrange: true,
+              ticks: ""
+            },
+            gridshape: 'linear',
+            domain: {
+              x: [0.35, 1],
+              y: [0.1, 0.9]
+            },
+            bgcolor: 'rgba(255,255,255,0)'
+          },
+          showlegend: true,
+          legend: {
+            "orientation": 'h',
+            y: 1.1,
+            x: 0.95
+          },
+          hovermode: 'closest',
+          paper_bgcolor: '#fff',
+          plot_bgcolor: '#fff',
+          width: sub_width,
+          height: sub_height
+        }
+
+        var sub_data = [base_bar, bar_incise, bar_country, radar_incise, radar_country, radar_impute]
+
+        var bar_data = [base_bar, bar_incise, bar_country]
+
+        var radar_data = [radar_incise, radar_country, radar_impute]
+
+        var plot_config = {
+          displayModeBar: true,
+          displaylogo: false,
+          modeBarButtonsToRemove: ['select2d', 'zoom2d', 'lasso2d', 'zoomIn2d', 'zoomOut2d', 'hoverClosestCartesian', 'hoverCompareCartesian', 'toggleSpikelines', 'resetViews']
+        };
+
+        Plotly.newPlot('incise-graph', sub_data, sub_layout, plot_config)
+        Plotly.newPlot('incise-bar', bar_data, bar_layout, plot_config)
+        Plotly.newPlot('incise-radar', radar_data, radar_layout, plot_config)
+
+      });
+
+    };
+
+    $(document).ready(
+      plot_graphs()
+    );
+
+    $("#incise-graph").on('plotly_click', function(_, data) {
+      var country = data.points[0].y
+
+      if ((typeof country) != "undefined") {
+        if (country != "InCiSE") {
+          selectizeCountry.setValue(country);
+          plot_graphs();
+        }
       }
 
-      var sub_data = [base_bar, bar_incise, bar_country, radar_incise, radar_country, radar_impute]
-
-      var bar_data = [base_bar, bar_incise, bar_country]
-
-      var radar_data = [radar_incise, radar_country, radar_impute]
-
-      var plot_config = {
-        displayModeBar: true, displaylogo: false, modeBarButtonsToRemove:['select2d', 'zoom2d', 'lasso2d', 'zoomIn2d', 'zoomOut2d', 'hoverClosestCartesian', 'hoverCompareCartesian', 'toggleSpikelines', 'resetViews']};
-
-      Plotly.newPlot('incise-graph', sub_data, sub_layout, plot_config)
-      Plotly.newPlot('incise-bar', bar_data, bar_layout, plot_config)
-      Plotly.newPlot('incise-radar', radar_data, radar_layout, plot_config)
-
-  });
-
-};
-
-$(document).ready(
-  plot_graphs()
-);
-
-$("#incise-graph").on('plotly_click', function(_, data){
-  var country = data.points[0].y
-
-  if ((typeof country) != "undefined") {
-    if (country != "InCiSE") {
-      selectizeCountry.setValue(country);
-      plot_graphs();
-    }
-  }
-
-})
-
-</script>
+    })
+  </script>
 
 </body>
+
 </html>
