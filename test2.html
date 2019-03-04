@@ -308,9 +308,9 @@
 
       </div>
 
-      <!-- Cotent panes -->
+      <!-- Cotent panels -->
 
-      <div class="col-xs-12 col-lg-9 col-xl-10 p-3">
+      <div class="col col-xs-12 col-lg-9 col-xl-10 p-3" id="content-panels">
 
         <div class="tab-content" id="incise-tab-content">
 
@@ -1569,12 +1569,14 @@
 
     $("#about-tab").on('shown.bs.tab', function() {
       $("#incise-controls").fadeOut();
-      $("#incise-sidebar").addClass("d-none d-lg-block")
+      $("#incise-sidebar").addClass("d-none d-xl-block")
+      $('#content-panels').removeClass("col-xs-12 col-lg-9 col-xl-10")
     });
 
     $("#about-tab").on('hide.bs.tab', function() {
       $("#incise-controls").fadeIn();
-      $("#incise-sidebar").removeClass("d-none d-lg-block")
+      $("#incise-sidebar").removeClass("d-none d-xl-block")
+      $('#content-panels').addClass("col-xs-12 col-lg-9 col-xl-10")
     });
 
     $("#data-tab").on('shown.bs.tab', function() {
