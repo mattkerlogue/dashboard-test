@@ -1559,6 +1559,7 @@
       chk_ctry2(),
       plot_graphs(),
       filter_table(),
+      $(".btn-group").addClass("d-none d-lg-block"),
       $(".btn-group button").removeClass("btn-secondary").addClass("btn-sm border-secondary btn-light"),
       $(".dt-buttons").addClass("pt-2").prepend('<em class="btn pr-2 btn-sm border-secondary text-muted">Download table:</em>')
     );
@@ -1697,7 +1698,11 @@
       if ($(window).width() > 992) {
         $("#collapse-controls").collapse('show')
       }
+      if ($(window).width() < 992) {
+        $("#collapse-controls").collapse('hide')
+      }
     });
+
 
     function chk_ctry2() {
 
@@ -1714,9 +1719,12 @@
       }
     }
 
+
     $("#controls-button").on('click', function(){
       $("#collapse-controls").collapse('toggle')
     });
+
+
   </script>
 
 </body>
